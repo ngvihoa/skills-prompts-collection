@@ -91,13 +91,18 @@ Stat distribution guidance:
 
 Output composition:
 - Show one clean flat presentation where the front and back are easy to inspect
-- Also show one portfolio mockup version with a more attractive presentation and slight perspective
+- For the clear asset view, render both cards straight-on as flat isolated assets
+- No drop shadow, no cast shadow, no glow, no perspective, no mockup surface, and no environmental lighting in the clear asset view
+- Place the clear asset view on a plain solid background with strong contrast and clean sharp edges so the cards are easy to background-remove and reuse in design software
+- Also show one separate portfolio mockup version with a more attractive presentation and slight perspective
 - Keep everything visually cohesive as one mini card design project
 
 Important constraints:
 - Do not add skill effect descriptions
 - Do not create a full gameplay system
 - Do not overload the card with text
+- The clear asset view must be production-ready for background removal
+- Do not add any shadow around or underneath the cards in the clear asset view
 - Focus on presentation quality, charm, clarity, and consistency
 ```
 
@@ -132,6 +137,15 @@ Back card:
 - minimal decorative design
 - thin frame matching the front
 
+Clear asset view requirements:
+- flat straight-on view
+- no shadows
+- no glow
+- no perspective
+- no mockup surface
+- isolated on a plain solid background
+- sharp clean edges for easy background removal
+
 All text must be in English.
 Choose colors based on the input subject and element. Keep the palette harmonious, readable, and visually cohesive.
 
@@ -140,6 +154,25 @@ Auto-generate stats on a 1–20 scale:
 - Rare: 8–14
 - Epic: 13–20
 Adjust the distribution based on the subject’s visual impression.
+```
+
+---
+
+## Add-on để tránh shadow ở front/back
+Nếu công cụ tạo ảnh hay tự thêm bóng đổ vào thẻ, hãy thêm đoạn này vào prompt:
+
+```text
+For the clear front-and-back card view, render both cards as flat, isolated assets with no drop shadow, no cast shadow, no glow, no perspective, no mockup surface, and no environmental lighting.
+
+Place the cards on a plain solid background with clean, sharp edges so they can be easily background-removed and reused in design software.
+
+Do not add any shadow around or underneath the cards.
+```
+
+Phiên bản ngắn:
+
+```text
+For the clear card asset view: no shadows, no glow, no perspective, no depth, no mockup, flat straight-on view, isolated on a plain solid background, sharp clean edges, easy to remove background.
 ```
 
 ---
