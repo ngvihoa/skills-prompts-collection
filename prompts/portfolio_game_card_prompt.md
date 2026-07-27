@@ -1,251 +1,474 @@
-# Prompt tối ưu cho AI tạo ảnh – Portfolio Game Card
+# Portfolio Game Card Generator — Prompt chuẩn hóa
 
 ## Mục đích
-Prompt này dùng để tạo **thẻ bài game dạng concept** cho **portfolio cá nhân**. Kết quả ưu tiên **đẹp, gọn, đồng bộ, có cảm giác như một dự án card game**, không cần phức tạp như game thật.
+
+Skill này tạo thẻ bài game dạng concept cho portfolio cá nhân. Ưu tiên:
+
+- thiết kế đồng bộ theo từng archive
+- dễ cắt ghép và remove background
+- không có chi tiết vượt khỏi card area
+- không gộp front và back trong cùng một asset
+- không tự dùng ảnh cũ hoặc master chưa được cung cấp
 
 ---
 
-## Cách dùng
-Thay các phần trong ngoặc nhọn bằng thông tin của bạn:
+# 1. Quy trình bắt buộc
 
-- `{CARD_NAME}`: tên thẻ
-- `{ELEMENT}`: hệ/nguyên tố
-- `{RARITY}`: Common / Rare / Epic
-- `{PROJECT_NAME}`: tên dự án để hiện ở mặt sau
-- `{INPUT_SUBJECT}`: mô tả ngắn ảnh đầu vào nếu cần
+Không generate front, back và mockup trong cùng một lượt.
 
-Nếu công cụ hỗ trợ ảnh tham chiếu, hãy **đính kèm ảnh đầu vào** và dùng prompt dưới đây.
+Mỗi lượt chỉ chạy đúng một mode:
+
+1. **FRONT ASSET MODE** — tạo đúng một mặt trước.
+2. **BACK ASSET MODE** — tạo đúng một mặt sau.
+3. **MOCKUP MODE** — dùng front và back đã duyệt để dựng presentation.
+
+Không tạo split layout, comparison sheet, front-and-back pair hoặc hai card trong cùng một ảnh asset.
 
 ---
 
-## Prompt hoàn chỉnh (bản tối ưu cho AI tạo ảnh)
+# 2. Quy ước archive và master
+
+Dùng quy ước tên file:
 
 ```text
-Create a polished portfolio-quality game card concept based on the provided input image.
+<archive_name>_master_front.png
+<archive_name>_master_back.png
+```
 
-The card style should be cute, minimal, clean, modern, and more refined than a simple casual card game. The design should feel professional and visually cohesive, suitable for a designer portfolio. Use a single unified card format.
+Ví dụ:
 
-Generate a complete card presentation that includes:
-1. a clear front view of the card,
-2. a clear back view of the card,
-3. a polished portfolio mockup presentation showing both front and back.
+```text
+ember_master_front.png
+ember_master_back.png
 
-Main subject:
-- Use the provided input image as the main illustration source.
-- Preserve the subject identity and overall silhouette.
-- Adapt the subject into a clean card illustration composition.
+frost_master_front.png
+frost_master_back.png
+```
 
-Card information:
+Không dùng dấu `/` trong tên file.
+
+## Master availability check
+
+Chỉ được dùng master khi file tương ứng thực sự được cung cấp hoặc có sẵn trong Project Sources.
+
+Không được tự suy luận hoặc lấy master từ:
+
+- ảnh đã generate trước đó
+- ảnh trong lượt chat cũ
+- ví dụ trong prompt
+- visual memory
+- archive khác
+
+Nếu `Reference Mode: Master` nhưng thiếu file bắt buộc, phải dừng và yêu cầu upload file.
+
+Nếu `Reference Mode: None`, không được dùng bất kỳ ảnh card cũ nào làm reference.
+
+---
+
+# 3. Thứ tự ưu tiên bắt buộc
+
+Khi có xung đột, luôn ưu tiên theo thứ tự sau:
+
+1. **Card Area Lock**
+2. **Layout Containment**
+3. **Archive Master Consistency**
+4. **Visual polish and creativity**
+
+Nếu master có chi tiết nhô ra khỏi card, không được sao chép lỗi đó. Giữ style của master nhưng phải đưa chi tiết vào trong card area.
+
+---
+
+# 4. Non-negotiable Card Area Lock
+
+Quy tắc này luôn bật trong mọi mode và không được bỏ qua.
+
+```text
+NON-NEGOTIABLE CARD AREA LOCK
+
+Every generated card must fit entirely inside one fixed, simple, closed rounded-rectangle card area.
+
+This rule always applies and cannot be disabled.
+
+No visual element may extend beyond the physical card boundary, including:
+- character artwork
+- items and weapons
+- flames, particles, glow, smoke, and shadows
+- title decorations
+- gems, crests, badges, tabs, and icons
+- frame ornaments
+- corner decorations
+- logos
+- background shapes
+
+The outer card silhouette must remain one uninterrupted rounded rectangle with no protrusions, extensions, raised ornaments, die-cut shapes, or border-breaking artwork of any kind.
+
+All design layers must be clipped to the card area.
+
+Keep a minimum internal safety margin of 3–5% inside every outer card edge.
+
+If an element does not fit, scale it down, move it inward, flatten it, or simplify it.
+Never expand it outside the card area.
+
+Containment is more important than drama, scale, decoration, or fidelity to a protruding reference detail.
+
+If the master reference contains any protruding or border-breaking element, do not reproduce that defect. Preserve the master’s visual style, but move, scale, flatten, or simplify the element so it remains fully inside the locked card area.
+```
+
+---
+
+# 5. Prompt — Front Asset Mode
+
+```text
+TASK MODE: FRONT ASSET ONLY
+
+Generate exactly one image containing exactly one front card.
+Do not generate a back card.
+Do not generate a mockup.
+Do not place a second card anywhere in the image.
+Do not create a split composition, comparison sheet, presentation board, or front-and-back pair.
+
+INPUT
 - Card Name: "{CARD_NAME}"
 - Element: "{ELEMENT}"
 - Rarity: "{RARITY}"
-- Project Name for card back: "{PROJECT_NAME}"
+- Archive Name: "{ARCHIVE_NAME}"
+- Reference Mode: "{REFERENCE_MODE}"
 
-Language rule:
-- All visible text on the card must be in English.
+SUBJECT IMAGE
+Use only the newly provided monster, item, resource, or logo image as the subject.
+Preserve its recognizable identity and overall silhouette.
 
-Front card layout:
-- Top area: card name
-- Center area: large main illustration
-- Bottom area: element and 3 stats
-- Include these stat labels: HP, ATK, DEF
-- Do not include any skill description or effect text
-- Optionally include the rarity label if it improves the composition
+REFERENCE CHECK
+If Reference Mode is Master:
+- use only "{ARCHIVE_NAME}_master_front.png"
+- the file must be explicitly available in the current request or Project Sources
+- do not use the back master
+- do not use previous generated cards or earlier conversation images
+- if the file is missing, stop and ask the user to provide it
 
-Back card layout:
-- Show the project name as a text-based logo
-- Use a clean decorative composition
-- Use a thin frame matching the front card
-- Keep the back minimal and visually elegant
+If Reference Mode is None:
+- do not use any previous generated card as reference
+- do not infer a missing master
+- follow only the current subject image and this prompt
 
-Visual style:
-- Inspired by cute minimal card designs
-- Thin frame
-- Soft but clean shapes
-- Harmonious color palette
-- Strong readability
-- Slightly premium look
-- Simple background with enough contrast
-- No clutter
-- No dense UI
-- No complex gameplay text
+LOCKED FRONT TEMPLATE
+When the front master is available, preserve:
+- card aspect ratio
+- rounded-rectangle silhouette
+- frame style and border thickness
+- corner radius
+- title panel position
+- illustration window position
+- rarity position
+- element position
+- HP / ATK / DEF positions
+- spacing and visual hierarchy
+- archive-specific visual language
 
-Color rules:
-- Choose the main colors based on the input character/item/logo and the selected element
-- Keep the palette harmonious and readable
-- Make sure the illustration stands out clearly from the background
+Replace only:
+- subject illustration
+- card name
+- element
+- rarity
+- HP / ATK / DEF values
+- permitted accent colours
 
-Stat generation rules:
-Generate HP, ATK, and DEF automatically using a 1–20 scale.
-Base the values on rarity and visual impression.
+NON-NEGOTIABLE CARD AREA LOCK
+Every visual layer must remain fully inside one simple closed rounded-rectangle card area.
+No protrusions of any kind.
+No raised crest, gem, tab, badge, icon, flame, ornament, weapon, particle, glow, or decorative layer may cross the physical card edge.
+All layers must be clipped to the card area.
+Keep 3–5% internal padding from the outer card boundary.
 
-Recommended ranges:
-- Common: 4–9
-- Rare: 8–14
-- Epic: 13–20
+FRONT LAYOUT CONTAINMENT
+Use three protected zones:
+1. title and rarity zone
+2. central illustration zone
+3. element and stats zone
 
-Stat distribution guidance:
-- Agile or offensive-looking subject: slightly higher ATK
-- Tanky or defensive-looking subject: slightly higher HP or DEF
-- Balanced-looking subject: more even distribution
+The subject and all attached objects must remain fully inside the central illustration window.
+The illustration window acts as a hard clipping mask.
 
-Output composition:
-- Show one clean flat presentation where the front and back are easy to inspect
-- For the clear asset view, render both cards straight-on as flat isolated assets
-- No drop shadow, no cast shadow, no glow, no perspective, no mockup surface, and no environmental lighting in the clear asset view
-- Place the clear asset view on a plain solid background with strong contrast and clean sharp edges so the cards are easy to background-remove and reuse in design software
-- Also show one separate portfolio mockup version with a more attractive presentation and slight perspective
-- Keep everything visually cohesive as one mini card design project
+No part of the subject may overlap or touch:
+- title panel
+- rarity badge
+- element bar
+- HP / ATK / DEF row
+- outer frame
+- corner decoration
 
-Important constraints:
-- Do not add skill effect descriptions
-- Do not create a full gameplay system
-- Do not overload the card with text
-- The clear asset view must be production-ready for background removal
-- Do not add any shadow around or underneath the cards in the clear asset view
-- Focus on presentation quality, charm, clarity, and consistency
-```
+This includes:
+- head and hat
+- hands and feet
+- weapons and staffs
+- wings and tails
+- flames and smoke
+- particles and glow
+- spell effects and shadows
 
----
+Keep 5–8% internal safety margin inside the illustration window.
+Scale the subject down when necessary.
+Remove or simplify visual effects that cannot fit.
+No pop-out art, no border break, and no cross-zone overlap.
 
-## Prompt rút gọn (dễ copy nhanh)
-
-```text
-Create a polished portfolio-quality game card concept based on the provided input image. The style should be cute, minimal, clean, modern, and slightly premium.
-
-Generate a complete presentation including:
-- a clear front card view,
-- a clear back card view,
-- and a portfolio mockup showing both.
-
-Use the provided image as the main illustration source and preserve the subject identity.
-
-Card info:
-- Name: "{CARD_NAME}"
-- Element: "{ELEMENT}"
-- Rarity: "{RARITY}"
-- Project Name: "{PROJECT_NAME}"
-
-Front card:
+CARD CONTENT
 - top: card name
-- center: large illustration
-- bottom: element + HP / ATK / DEF
-- no skill description
+- centre: main illustration
+- bottom: element and HP / ATK / DEF
+- all visible text in English
+- no skill description or effect text
 
-Back card:
-- text logo using the project name
-- minimal decorative design
-- thin frame matching the front
-
-Clear asset view requirements:
-- flat straight-on view
-- no shadows
-- no glow
-- no perspective
-- no mockup surface
-- isolated on a plain solid background
-- sharp clean edges for easy background removal
-
-All text must be in English.
-Choose colors based on the input subject and element. Keep the palette harmonious, readable, and visually cohesive.
-
-Auto-generate stats on a 1–20 scale:
+STAT GENERATION
+Use a 1–20 scale:
 - Common: 4–9
 - Rare: 8–14
 - Epic: 13–20
-Adjust the distribution based on the subject’s visual impression.
+
+Adjust distribution based on visual impression:
+- agile or offensive: slightly higher ATK
+- heavy or defensive: slightly higher HP or DEF
+- balanced: more even values
+
+OUTPUT RULES
+- exactly one front card
+- straight-on orthographic view
+- centred and fully visible
+- flat production asset
+- plain solid background with strong edge contrast
+- no drop shadow
+- no cast shadow
+- no glow outside the card
+- no perspective
+- no tabletop, hand, stand, or environment
+- no object or decoration outside the card silhouette
 ```
 
 ---
 
-## Add-on để tránh shadow ở front/back
-Nếu công cụ tạo ảnh hay tự thêm bóng đổ vào thẻ, hãy thêm đoạn này vào prompt:
+# 6. Prompt — Back Asset Mode
 
 ```text
-For the clear front-and-back card view, render both cards as flat, isolated assets with no drop shadow, no cast shadow, no glow, no perspective, no mockup surface, and no environmental lighting.
+TASK MODE: BACK ASSET ONLY
 
-Place the cards on a plain solid background with clean, sharp edges so they can be easily background-removed and reused in design software.
+Generate exactly one image containing exactly one back card.
+Do not generate a front card.
+Do not generate a character or subject illustration.
+Do not generate a mockup.
+Do not place a second card anywhere in the image.
+Do not create a split composition, comparison sheet, presentation board, or front-and-back pair.
 
-Do not add any shadow around or underneath the cards.
+INPUT
+- Project Name: "{PROJECT_NAME}"
+- Archive Name: "{ARCHIVE_NAME}"
+- Reference Mode: "{REFERENCE_MODE}"
+
+REFERENCE CHECK
+If Reference Mode is Master:
+- use only "{ARCHIVE_NAME}_master_back.png"
+- the file must be explicitly available in the current request or Project Sources
+- do not use the front master or subject image
+- do not use previous generated cards or earlier conversation images
+- if the file is missing, stop and ask the user to provide it
+
+If Reference Mode is None:
+- do not use any previous generated card as reference
+- do not infer a missing master
+- follow only this prompt
+
+LOCKED BACK TEMPLATE
+When the back master is available, preserve:
+- card aspect ratio
+- rounded-rectangle silhouette
+- frame style and border thickness
+- corner radius
+- logo area
+- pattern layout
+- spacing
+- archive-specific visual language
+
+Only replace the project text/logo when necessary.
+
+NON-NEGOTIABLE CARD AREA LOCK
+Every visual layer must remain fully inside one simple closed rounded-rectangle card area.
+No protrusions of any kind.
+No crest, gem, tab, logo, icon, glow, ornament, line, pattern, or decorative layer may cross the physical card edge.
+All layers must be clipped to the card area.
+Keep 3–5% internal padding from every outer edge.
+
+BACK CONTENT
+- project name as a clean text logo
+- minimal decorative composition
+- thin frame consistent with the archive master
+- all visible text in English
+
+OUTPUT RULES
+- exactly one back card
+- straight-on orthographic view
+- centred and fully visible
+- flat production asset
+- plain solid background with strong edge contrast
+- no drop shadow
+- no cast shadow
+- no glow outside the card
+- no perspective
+- no tabletop, hand, stand, or environment
+- no object or decoration outside the card silhouette
 ```
 
-Phiên bản ngắn:
+---
+
+## 6B. Back Archive Variant
 
 ```text
-For the clear card asset view: no shadows, no glow, no perspective, no depth, no mockup, flat straight-on view, isolated on a plain solid background, sharp clean edges, easy to remove background.
+TASK MODE: BACK ARCHIVE VARIANT
+
+Use the provided existing back card as the single structural reference.
+
+Generate exactly one new back card for the target archive.
+
+Preserve:
+- card aspect ratio
+- rounded-rectangle silhouette
+- corner radius
+- frame thickness
+- logo position
+- logo scale
+- spacing
+- pattern hierarchy
+- overall back-card layout
+
+Adapt only:
+- archive colour palette
+- archive emblem or motif
+- internal pattern details
+- permitted decorative accents
+- archive name or project text when requested
+
+The new back must look like a coordinated archive variation of the source back, not a completely redesigned card.
+
+NON-NEGOTIABLE CARD AREA LOCK:
+- every layer must remain inside one simple closed rounded rectangle
+- no crest, gem, icon, ornament, glow, pattern, or frame detail may protrude beyond the card boundary
+- keep 3–5% internal safety padding
+- no drop shadow
+- no perspective
+- no environment
+- generate exactly one flat back card asset
 ```
 
 ---
 
-## Ví dụ điền sẵn – Pyrokin
+# 7. Prompt — Portfolio Mockup Mode
 
 ```text
-Create a polished portfolio-quality game card concept based on the provided input image.
+TASK MODE: PORTFOLIO MOCKUP
 
-The card style should be cute, minimal, clean, modern, and more refined than a simple casual card game. The design should feel professional and visually cohesive, suitable for a designer portfolio.
+Use only the provided, already-approved front asset and back asset.
 
-Generate a complete card presentation that includes:
-1. a clear front view of the card,
-2. a clear back view of the card,
-3. a polished portfolio mockup presentation showing both front and back.
+Do not redraw, regenerate, reinterpret, restyle, or alter either card face.
+Do not change:
+- text
+- numbers
+- illustration
+- frame
+- colours
+- proportions
+- layout
 
-Use the provided monster image as the main illustration source. Preserve the subject identity, proportions, and recognizable silhouette. Adapt it into a clean and charming card illustration composition.
+Creative presentation is allowed around the cards.
 
-Card information:
-- Card Name: "Pyrokin"
-- Element: "Fire"
-- Rarity: "Common"
-- Project Name for card back: "Ember Archive"
+You may use:
+- perspective
+- card rotation
+- overlapping placement
+- soft cast shadows
+- realistic contact shadows
+- depth
+- studio lighting
+- gradients
+- textured or decorative backgrounds
+- podiums or display surfaces
+- tasteful particles or environmental effects
+- archive-themed props and scenery
 
-All visible text on the card must be in English.
+All presentation effects must remain outside the printed card artwork and must not modify the card faces.
 
-Front card layout:
-- Top area: "Pyrokin"
-- Center area: large monster illustration
-- Bottom area: element and 3 stats
-- Include these stat labels: HP, ATK, DEF
-- Do not include skill description text
+Show exactly:
+- one front card
+- one back card
 
-Back card layout:
-- Show "Ember Archive" as a text-based logo
-- Use a thin frame and a clean decorative composition matching the front
-
-Visual style:
-- Cute, minimal, polished
-- Thin frame
-- Harmonious fiery palette
-- Orange, ember, warm red, and subtle cream tones
-- Soft premium feel
-- Simple background
-- Strong contrast and readability
-
-Generate HP, ATK, and DEF automatically using a 1–20 scale.
-For Common rarity, use the 4–9 range. Since the monster looks agile and offensive, slightly favor ATK over DEF.
-
-Show:
-- one clear flat front-and-back presentation
-- one portfolio mockup version with slight perspective
-
-Do not add skill effect descriptions.
-Focus on charm, clarity, and presentation quality.
+The cards must remain separate physical objects.
+Do not merge the front and back into one card design.
+Do not generate replacement production assets.
 ```
 
 ---
 
-## Gợi ý khi dùng với công cụ tạo ảnh
-- Nếu công cụ cho phép **upload ảnh tham chiếu**, hãy luôn upload ảnh monster/item/logo.
-- Nếu công cụ hỗ trợ **nhiều ảnh đầu ra**, bạn có thể yêu cầu:
-  - 1 ảnh **clear view**
-  - 1 ảnh **mockup view**
-- Nếu công cụ chỉ tạo **1 ảnh**, hãy yêu cầu nó đặt **front + back trong cùng một khung hình**.
+# 8. Input ngắn dùng hằng ngày
+
+## Tạo front có master
+
+```text
+Task Mode: Front Asset
+Reference Mode: Master
+Archive Name: ember
+Card Name: Ignimor
+Element: Fire
+Rarity: Common
+```
+
+Đính kèm:
+
+- ảnh subject mới
+- `ember_master_front.png`
+
+## Tạo front chưa có master
+
+```text
+Task Mode: Front Asset
+Reference Mode: None
+Archive Name: ember
+Card Name: Ignimor
+Element: Fire
+Rarity: Common
+```
+
+Đính kèm ảnh subject mới. Không dùng ảnh card cũ làm reference.
+
+## Tạo back variant
+
+```text
+Mode: Back Archive Variant
+Source Back: global_master_back.png
+Target Archive: frost
+Project Name: Ember Archive
+Element Theme: Ice
+```
+
+Đính kèm `global_master_back.png`.
+
+## Tạo mockup
+
+```text
+Task Mode: Portfolio Mockup
+```
+
+Đính kèm front asset và back asset đã duyệt.
 
 ---
 
-## Gợi ý nâng cấp sau này
-Bạn có thể mở rộng prompt này thêm các biến như:
-- card type: Monster / Item / Resource / Logo
-- border color by element
-- rarity badge style
-- alternate background patterns
-- multiple cards in one set for a portfolio series
+# 9. Phản hồi khi thiếu master
 
+```text
+I cannot start Master Reference Mode because the required master file is missing:
+- {ARCHIVE_NAME}_master_front.png
+```
+
+hoặc:
+
+```text
+I cannot start Master Reference Mode because the required master file is missing:
+- {ARCHIVE_NAME}_master_back.png
+```
+
+Yêu cầu người dùng upload file hoặc đổi sang `Reference Mode: None`.
