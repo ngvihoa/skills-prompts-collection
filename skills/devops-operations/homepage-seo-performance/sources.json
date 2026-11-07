@@ -1,0 +1,30 @@
+{
+  "id": "05085db59a8e",
+  "sha256": "05085db59a8e65270622d241f33ec9e749032a0a602e39db270991d184568a85",
+  "names": [
+    "homepage-seo-performance"
+  ],
+  "description": "Measure homepage SEO and browser performance for a supplied website or local deployment, create a baseline or comparable before/after report, and distinguish static HTML findings from runtime measurements.",
+  "snapshot": "skills/devops-operations/homepage-seo-performance/SKILL.md",
+  "sources": [
+    {
+      "type": "repository",
+      "path": "skills/devops-operations/homepage-seo-performance/SKILL.md",
+      "note": "Provider-neutral adaptation maintained in this repository."
+    }
+  ],
+  "distribution": {
+    "kind": "local_skill",
+    "provider": null,
+    "note": "Provider-neutral local adaptation.",
+    "archive_reason": "Locally maintained reusable instructions."
+  },
+  "storage": "archive",
+  "archive_files": [
+    {
+      "path": "skills/devops-operations/homepage-seo-performance/SKILL.md",
+      "sha256": "05085db59a8e65270622d241f33ec9e749032a0a602e39db270991d184568a85"
+    }
+  ],
+  "domain": "devops-operations"
+}

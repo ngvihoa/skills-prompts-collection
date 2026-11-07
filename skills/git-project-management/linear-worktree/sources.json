@@ -1,0 +1,34 @@
+{
+  "id": "f38d21421ee9",
+  "sha256": "f38d21421ee97f38fb6ce727616bca1d4758be8d2ec3f667d69539543e7efd1c",
+  "names": [
+    "linear-worktree"
+  ],
+  "description": "Implement a Linear issue in an isolated Git worktree, validate the change, and prepare the requested commit, pull request, review, or QA handoff using the target repository's conventions.",
+  "snapshot": "skills/git-project-management/linear-worktree/SKILL.md",
+  "sources": [
+    {
+      "type": "repository",
+      "path": "skills/git-project-management/linear-worktree/SKILL.md",
+      "note": "Provider-neutral adaptation maintained in this repository."
+    }
+  ],
+  "distribution": {
+    "kind": "local_skill",
+    "provider": null,
+    "note": "Provider-neutral local adaptation.",
+    "archive_reason": "Locally maintained reusable instructions."
+  },
+  "storage": "archive",
+  "archive_files": [
+    {
+      "path": "skills/git-project-management/linear-worktree/SKILL.md",
+      "sha256": "f38d21421ee97f38fb6ce727616bca1d4758be8d2ec3f667d69539543e7efd1c"
+    },
+    {
+      "path": "skills/git-project-management/linear-worktree/agents/openai.yaml",
+      "sha256": "30dbc14054f6d2008b6e5ed7ce9c4f6477858a65a9a4a1d4ad2e7d6afd0e3465"
+    }
+  ],
+  "domain": "git-project-management"
+}

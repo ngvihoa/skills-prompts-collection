@@ -1,0 +1,30 @@
+{
+  "id": "f4edb39ff09e",
+  "sha256": "f4edb39ff09efe99f29aa66b37067c2596238bae233d8be45e46208d759a65d2",
+  "names": [
+    "typescript-setup"
+  ],
+  "description": "How to set up a new TypeScript project",
+  "snapshot": "skills/software-engineering/typescript-setup/SKILL.md",
+  "sources": [
+    {
+      "type": "repository",
+      "path": "skills/software-engineering/typescript-setup/SKILL.md",
+      "note": "Reusable local skill; source package not independently verified."
+    }
+  ],
+  "distribution": {
+    "kind": "unresolved",
+    "provider": null,
+    "note": "",
+    "archive_reason": "Source package unverified; retained for reference."
+  },
+  "storage": "archive",
+  "archive_files": [
+    {
+      "path": "skills/software-engineering/typescript-setup/SKILL.md",
+      "sha256": "f4edb39ff09efe99f29aa66b37067c2596238bae233d8be45e46208d759a65d2"
+    }
+  ],
+  "domain": "software-engineering"
+}

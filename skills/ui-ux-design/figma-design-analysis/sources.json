@@ -1,0 +1,30 @@
+{
+  "id": "dad8ba45ea1c",
+  "sha256": "dad8ba45ea1c628f315dd660ff8498aaf91bec1d152a1cbc994b72b00cfcde71",
+  "names": [
+    "figma-design-analysis"
+  ],
+  "description": "Analyze a Figma design, FigJam board, screenshot, or exported design into screen inventories, user flows, component states, and design tokens before implementation.",
+  "snapshot": "skills/ui-ux-design/figma-design-analysis/SKILL.md",
+  "sources": [
+    {
+      "type": "repository",
+      "path": "skills/ui-ux-design/figma-design-analysis/SKILL.md",
+      "note": "Provider-neutral adaptation maintained in this repository."
+    }
+  ],
+  "distribution": {
+    "kind": "local_skill",
+    "provider": null,
+    "note": "Provider-neutral local adaptation.",
+    "archive_reason": "Locally maintained reusable instructions."
+  },
+  "storage": "archive",
+  "archive_files": [
+    {
+      "path": "skills/ui-ux-design/figma-design-analysis/SKILL.md",
+      "sha256": "dad8ba45ea1c628f315dd660ff8498aaf91bec1d152a1cbc994b72b00cfcde71"
+    }
+  ],
+  "domain": "ui-ux-design"
+}

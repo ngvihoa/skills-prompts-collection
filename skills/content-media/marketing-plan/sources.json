@@ -1,0 +1,30 @@
+{
+  "id": "e38ab9d3baff",
+  "sha256": "e38ab9d3baff9aba31ca09af451c3d53fa7cebbce39c0b36a7b18ed1f1179316",
+  "names": [
+    "marketing-plan"
+  ],
+  "description": "Build an actionable marketing plan for a product, service, or personal brand using the user's goals, audience, offer, budget, channels, and timeline, without depending on a product catalog or platform-specific tool.",
+  "snapshot": "skills/content-media/marketing-plan/SKILL.md",
+  "sources": [
+    {
+      "type": "repository",
+      "path": "skills/content-media/marketing-plan/SKILL.md",
+      "note": "Provider-neutral adaptation maintained in this repository."
+    }
+  ],
+  "distribution": {
+    "kind": "local_skill",
+    "provider": null,
+    "note": "Provider-neutral local adaptation.",
+    "archive_reason": "Locally maintained reusable instructions."
+  },
+  "storage": "archive",
+  "archive_files": [
+    {
+      "path": "skills/content-media/marketing-plan/SKILL.md",
+      "sha256": "e38ab9d3baff9aba31ca09af451c3d53fa7cebbce39c0b36a7b18ed1f1179316"
+    }
+  ],
+  "domain": "content-media"
+}

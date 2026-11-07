@@ -1,0 +1,42 @@
+{
+  "id": "eb257a8c5f1f",
+  "sha256": "eb257a8c5f1ff7e8decc210b5f15479c1d448a2917d6c41e9b5160324f04db89",
+  "names": [
+    "typescript-update"
+  ],
+  "description": "Guidance for updating to the newer versions of TypeScript. Use this when you need to upgrade TypeScript or as part of a larger dependency update process.",
+  "snapshot": "skills/software-engineering/typescript-update/SKILL.md",
+  "sources": [
+    {
+      "type": "repository",
+      "path": "skills/software-engineering/typescript-update/SKILL.md",
+      "note": "Reusable local skill; source package not independently verified."
+    }
+  ],
+  "distribution": {
+    "kind": "unresolved",
+    "provider": null,
+    "note": "",
+    "archive_reason": "Source package unverified; retained for reference."
+  },
+  "storage": "archive",
+  "archive_files": [
+    {
+      "path": "skills/software-engineering/typescript-update/4to5.md",
+      "sha256": "d90917347afe122ad887f2a426e0a979f14830a494407c7451333c913ac21bee"
+    },
+    {
+      "path": "skills/software-engineering/typescript-update/5to6.md",
+      "sha256": "a18afa3bf1108b301cdd211161dcb34b793135afa9c386d1cb90d394976cfa9c"
+    },
+    {
+      "path": "skills/software-engineering/typescript-update/6to7.md",
+      "sha256": "3db211d62045a11cde649d45b202ca4fdf406755cad89704b6deb1246a76d3d9"
+    },
+    {
+      "path": "skills/software-engineering/typescript-update/SKILL.md",
+      "sha256": "eb257a8c5f1ff7e8decc210b5f15479c1d448a2917d6c41e9b5160324f04db89"
+    }
+  ],
+  "domain": "software-engineering"
+}

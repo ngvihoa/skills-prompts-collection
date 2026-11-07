@@ -1,0 +1,4 @@
+interface:
+  display_name: "Linear Worktree"
+  short_description: "Implement Linear tasks in isolated worktrees"
+  default_prompt: "Use $linear-worktree to implement this Linear task in an isolated worktree, prepare the requested implementation or PR and any requested review/QA handoff: <Linear issue ID or URL>."

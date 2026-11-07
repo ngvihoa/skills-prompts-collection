@@ -1,0 +1,30 @@
+{
+  "id": "0b0ae9ee049b",
+  "sha256": "0b0ae9ee049bd66b4544ecb7a5b6d904e6097c9cc628767d820e1d700336315b",
+  "names": [
+    "querying-axiom"
+  ],
+  "description": "Queries Axiom for observability data. Use when user mentions Axiom, traces, spans, APL, monitors, telemetry, latency, p99.",
+  "snapshot": "skills/devops-operations/querying-axiom/SKILL.md",
+  "sources": [
+    {
+      "type": "repository",
+      "path": "skills/devops-operations/querying-axiom/SKILL.md",
+      "note": "Reusable local skill; source package not independently verified."
+    }
+  ],
+  "distribution": {
+    "kind": "local_skill",
+    "provider": null,
+    "note": "",
+    "archive_reason": "Locally maintained reusable instructions."
+  },
+  "storage": "archive",
+  "archive_files": [
+    {
+      "path": "skills/devops-operations/querying-axiom/SKILL.md",
+      "sha256": "0b0ae9ee049bd66b4544ecb7a5b6d904e6097c9cc628767d820e1d700336315b"
+    }
+  ],
+  "domain": "devops-operations"
+}
